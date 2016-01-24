@@ -6,7 +6,7 @@
  * Time: 10:50
  */
 
-namespace JontyBale\HttpParser\Tests\Command;
+namespace JontyBale\HttpParser\Tests\Model;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;

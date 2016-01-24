@@ -8,6 +8,7 @@
 
 namespace JontyBale\HttpParser\Model;
 
+use Money\Currency;
 use Money\Money;
 
 /**
@@ -32,6 +33,67 @@ class Product implements \JsonSerializable
     protected $url;
 
     /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return Money
+     */
+    public function getUnitPrice()
+    {
+        return $this->unitPrice;
+    }
+
+    /**
+     * Helper to get back to GBP as string from our Money object.
+     *
+     * @return string
+     */
+    public function getUnitPriceInGBP()
+    {
+
+        return (string) new MoneyDecorator($this->getUnitPrice());
+    }
+
+    /**
+     * @return Url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Create a product object.
+     *
+     * @param $title
+     * @param $description
+     * @param $unitPrice
+     * @param Url $url
+     */
+    public function __construct($title, $description, $unitPrice, Url $url)
+    {
+        $this->title = $title;
+        $this->description = $description;
+        $this->url = $url;
+
+        $unitPriceInPence = intval($unitPrice * 100);
+        $this->unitPrice = new Money($unitPriceInPence, new Currency('GBP'));
+    }
+
+    /**
      * (PHP 5 &gt;= 5.4.0)<br/>
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -40,6 +102,11 @@ class Product implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+        return (object) [
+            'title' => $this->getTitle(),
+            'size' => $this->getUrl()->getSize(),
+            'unit_price' => $this->getUnitPriceInGBP(),
+            'description' => $this->getDescription()
+        ];
     }
 }

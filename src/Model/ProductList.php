@@ -8,6 +8,7 @@
 
 namespace JontyBale\HttpParser\Model;
 
+use Money\Currency;
 use Money\Money;
 
 /**
@@ -18,9 +19,48 @@ use Money\Money;
  */
 class ProductList implements \JsonSerializable
 {
-
     /** @var Product[] */
-    protected $products;
+    protected $products = [];
+
+    /**
+     * Accessor for products
+     *
+     * @return Product[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add a product!
+     *
+     * @param Product $product
+     */
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
+    }
+
+    /**
+     * @return Money
+     */
+    public function getTotal()
+    {
+        $total = new Money(0, new Currency('GBP'));
+        foreach ($this->products AS $product) {
+            $total = $total->add($product->getUnitPrice());
+        }
+        return $total;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTotalInGBP()
+    {
+        return (string) new MoneyDecorator($this->getTotal());
+    }
 
     /**
      * (PHP 5 &gt;= 5.4.0)<br/>
@@ -31,6 +71,9 @@ class ProductList implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+        return (object) [
+            'results' => $this->products,
+            'total' => $this->getTotalInGBP()
+        ];
     }
 }

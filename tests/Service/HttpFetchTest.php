@@ -6,7 +6,7 @@
  * Time: 10:50
  */
 
-namespace JontyBale\HttpParser\Tests\Command;
+namespace JontyBale\HttpParser\Tests\Service;
 
 use JontyBale\HttpParser\Service\HttpFetch;
 use GuzzleHttp\Client;
@@ -41,6 +41,9 @@ class HttpFetchTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($url->getSize(), $expectedSize);
     }
 
+    /**
+     * Test adding console output
+     */
     public function testAttachConsoleOutput()
     {
         // setup our url and mock guzzle
