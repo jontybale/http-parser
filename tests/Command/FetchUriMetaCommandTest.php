@@ -12,8 +12,8 @@ use JontyBale\HttpParser\Command\FetchUriMetaCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class FetchUriMetaCommandTest extends \PHPUnit_Framework_TestCase {
-
+class FetchUriMetaCommandTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Test command execution with no URI, should throw.
      *

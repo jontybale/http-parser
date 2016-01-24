@@ -14,6 +14,7 @@ namespace JontyBale\HttpParser\Service;
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class Formatter {
+class Formatter
+{
 
 }

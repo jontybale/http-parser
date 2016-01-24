@@ -14,7 +14,8 @@ namespace JontyBale\HttpParser\Model;
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class UriMeta implements \JsonSerializable {
+class UriMeta implements \JsonSerializable
+{
 
     /** @var string */
     protected $uri;

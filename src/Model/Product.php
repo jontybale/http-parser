@@ -16,7 +16,8 @@ use Money\Money;
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class Product implements \JsonSerializable {
+class Product implements \JsonSerializable
+{
 
     /** @var string */
     protected $title;

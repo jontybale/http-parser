@@ -13,8 +13,8 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class FetchCommandTest extends \PHPUnit_Framework_TestCase {
-
+class FetchCommandTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Method to validate input is a valid url - testing failuire.
      *

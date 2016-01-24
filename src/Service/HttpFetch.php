@@ -15,6 +15,7 @@ namespace JontyBale\HttpParser\Service;
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class HttpFetch {
+class HttpFetch
+{
 
 }
