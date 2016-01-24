@@ -76,7 +76,7 @@ class Product implements \JsonSerializable
     }
 
     /**
-     * Create a product object.
+     * Create a product object - could do with some more input filtering.
      *
      * @param $title
      * @param $description
