@@ -9,7 +9,7 @@
 namespace JontyBale\HttpParser\Service;
 
 use JontyBale\HttpParser\Model\Product;
-use JontyBale\HttpParser\Model\UriMeta;
+use JontyBale\HttpParser\Model\Url;
 
 /**
  * Interface HttpFetchInterface defining the HttpFetch service.
@@ -25,13 +25,13 @@ interface HttpFetchInterface
      * @param $uri string
      * @return Product[]
      */
-    public function getProducts($uri);
+    public function fetchProducts($uri);
 
     /**
      * Method to get a UriMeta object for a specific URI.
      *
      * @param $uri string
-     * @return UriMeta
+     * @return Url
      */
-    public function getUriMeta($uri);
+    public function fetchUrl($uri);
 }

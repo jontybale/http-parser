@@ -25,7 +25,7 @@ class Product implements \JsonSerializable
     /** @var Money */
     protected $unitPrice;
 
-    /** @var UriMeta */
+    /** @var Url */
     protected $uriMeta;
 
     /**

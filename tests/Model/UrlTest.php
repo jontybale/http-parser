@@ -8,9 +8,9 @@
 
 namespace JontyBale\HttpParser\Tests\Command;
 
-use JontyBale\HttpParser\Model\UriMeta;
+use JontyBale\HttpParser\Model\Url;
 
-class UriMetaTest extends \PHPUnit_Framework_TestCase
+class UrlTest extends \PHPUnit_Framework_TestCase
 {
     // should be able to
 

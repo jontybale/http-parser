@@ -9,7 +9,7 @@
 namespace JontyBale\HttpParser\Service;
 
 use JontyBale\HttpParser\Model\Product;
-use JontyBale\HttpParser\Model\UriMeta;
+use JontyBale\HttpParser\Model\Url;
 
 /**
  * Class HttpFetch used as a facade on top of GuzzleHttp to fetch remote data and create
@@ -26,19 +26,19 @@ class HttpFetch implements HttpFetchInterface
      * @param $uri string
      * @return Product[]
      */
-    public function getProducts($uri)
+    public function fetchProducts($uri)
     {
-        // TODO: Implement getProducts() method.
+        // TODO: Implement fetchProducts() method.
     }
 
     /**
      * Method to get a UriMeta object for a specific URI.
      *
      * @param $uri string
-     * @return UriMeta
+     * @return Url
      */
-    public function getUriMeta($uri)
+    public function fetchUrl($uri)
     {
-        // TODO: Implement getUriMeta() method.
+        // TODO: Implement fetchUrl() method.
     }
 }
