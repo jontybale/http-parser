@@ -12,6 +12,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use JontyBale\HttpParser\Model\Product;
 use JontyBale\HttpParser\Model\Url;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class HttpFetch used as a facade on top of GuzzleHttp to fetch remote data and create
@@ -24,6 +25,9 @@ class HttpFetch implements HttpFetchInterface
 {
     /** @var Client */
     private $guzzle;
+
+    /** @var OutputInterface  */
+    private $consoleOutput = null;
 
     /**
      * Setup fetcher.
@@ -57,9 +61,32 @@ class HttpFetch implements HttpFetchInterface
     public function fetchUrl($uri)
     {
         $request = new Request('GET', $uri);
+        $this->log("Fetching " . $uri);
         return new Url(
             $request,
-            $this->guzzle->send($request, ['timeout' => 2])
+            $this->guzzle->send($request)
         );
+    }
+
+    /**
+     * Method to inject an output interface if being called by the console.
+     *
+     * @param OutputInterface $output
+     */
+    public function attachConsoleOutput(OutputInterface $output)
+    {
+        $this->consoleOutput = $output;
+    }
+
+    /**
+     * Internal class log abstraction.
+     *
+     * @param $message
+     */
+    private function log($message)
+    {
+        if (!is_null($this->consoleOutput) && $this->consoleOutput->isVerbose()) {
+            $this->consoleOutput->writeln($message);
+        }
     }
 }

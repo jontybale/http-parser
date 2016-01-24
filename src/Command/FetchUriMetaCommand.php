@@ -38,6 +38,7 @@ class FetchUriMetaCommand extends FetchCommand
     {
         $this->validateInputUrl($input);
 
+
         throw new \BadMethodCallException('Not implemented.');
     }
 }

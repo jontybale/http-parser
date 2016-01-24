@@ -40,4 +40,24 @@ class HttpFetchTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($url->getUrl(), $expectedUrl);
         $this->assertEquals($url->getSize(), $expectedSize);
     }
+
+    public function testAttachConsoleOutput()
+    {
+        // setup our url and mock guzzle
+        $expectedUrl = 'http://www.google.com/this-is-a-test';
+        $mockHandler = new MockHandler([
+            new Response(200),
+        ]);
+        $handler = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handler]);
+
+        $output = $this->getMock('Symfony\Component\Console\Output\OutputInterface');
+        $output->expects($this->once())->method('isVerbose')->willReturn(true);
+        $output->expects($this->once())->method('writeln')->with("Fetching $expectedUrl");
+
+        $sut = new HttpFetch($client);
+        $sut->attachConsoleOutput($output);
+
+        $url = $sut->fetchUrl($expectedUrl);
+    }
 }
