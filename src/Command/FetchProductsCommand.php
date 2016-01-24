@@ -51,7 +51,7 @@ class FetchProductsCommand extends FetchCommand
     {
         $inputUrl = $this->validateInputUrl($input);
         if ($output->isVerbose()) {
-            $output->writeln("Input URL: $inputUrl");
+            $output->writeln(" > <comment>Input URL: $inputUrl</comment>");
         }
 
         // timeout should be much lower in production, high due to latency / bandwidth at home.
@@ -59,7 +59,8 @@ class FetchProductsCommand extends FetchCommand
         $httpFetch = new HttpFetch($client);
         $httpFetch->attachConsoleOutput($output);
 
-        $products = $httpFetch->fetchProducts($inputUrl);
+        // and fetch our productList
+        $productList = $httpFetch->fetchProducts($inputUrl);
 
     }
 

@@ -11,25 +11,16 @@ namespace JontyBale\HttpParser\Model;
 use Money\Money;
 
 /**
- * Class Product representing a product which has been scraped from a URI.
+ * Class ProductList represnting a set of products
  *
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class Product implements \JsonSerializable
+class ProductList implements \JsonSerializable
 {
 
-    /** @var string */
-    protected $title;
-
-    /** @var string */
-    protected $description;
-
-    /** @var Money */
-    protected $unitPrice;
-
-    /** @var Url */
-    protected $url;
+    /** @var Product[] */
+    protected $products;
 
     /**
      * (PHP 5 &gt;= 5.4.0)<br/>

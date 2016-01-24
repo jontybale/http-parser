@@ -47,7 +47,15 @@ class HttpFetch implements HttpFetchInterface
      */
     public function fetchProducts($uri)
     {
+        // get main product URL
         $url = $this->fetchUrl($uri);
+
+        // dom parse to get our product list
+
+        // fetchUrl for each product
+
+
+        // return product list
 
         // TODO: Implement fetchProducts() method.
     }
@@ -86,7 +94,7 @@ class HttpFetch implements HttpFetchInterface
     private function log($message)
     {
         if (!is_null($this->consoleOutput) && $this->consoleOutput->isVerbose()) {
-            $this->consoleOutput->writeln($message);
+            $this->consoleOutput->writeln(" > <info>" . $message . "</info>");
         }
     }
 }
