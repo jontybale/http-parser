@@ -8,7 +8,12 @@
 
 namespace JontyBale\HttpParser\Model;
 
-
+/**
+ * Class UriMeta used to represent meta data about a URI.
+ *
+ * @author jontyb
+ * @package JontyBale\HttpParser
+ */
 class UriMeta implements \JsonSerializable {
 
     /** @var string */

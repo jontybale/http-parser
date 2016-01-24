@@ -13,6 +13,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class FetchProductsCommand used for retrieving information about products via
+ * HTTP.
+ *
+ * @author jontyb
+ * @package JontyBale\HttpParser
+ */
 class FetchProductsCommand extends Command
 {
     protected function configure()

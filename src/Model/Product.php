@@ -8,13 +8,20 @@
 
 namespace JontyBale\HttpParser\Model;
 
+use Money\Money;
 
+/**
+ * Class Product representing a product which has been scraped from a URI.
+ *
+ * @author jontyb
+ * @package JontyBale\HttpParser
+ */
 class Product implements \JsonSerializable {
 
     /** @var string */
     protected $title;
 
-    /** @var float */
+    /** @var Money */
     protected $unitPrice;
 
     /** @var UriMeta */

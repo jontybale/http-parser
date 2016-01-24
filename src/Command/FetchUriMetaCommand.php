@@ -13,6 +13,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class FetchUriMetaCommand used for retrieving meta data about a URI.
+ *
+ * @author jontyb
+ * @package JontyBale\HttpParser
+ */
 class FetchUriMetaCommand extends Command
 {
     protected function configure()
