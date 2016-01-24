@@ -29,7 +29,8 @@ class MoneyDecorator
     }
 
     /**
-     * Format money as a string.
+     * Format money as a string - using this format as requirements are as a pound/pence
+     * value with two decimal places - a float ill get reformatted as a JSON number (eg. 1.50 as 1.5).
      */
     public function __toString()
     {

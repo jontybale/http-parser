@@ -43,6 +43,8 @@ class ProductList implements \JsonSerializable
     }
 
     /**
+     * Get total price as a money object.
+     *
      * @return Money
      */
     public function getTotal()
@@ -55,6 +57,8 @@ class ProductList implements \JsonSerializable
     }
 
     /**
+     * Method to return total price as a string with 2 decimal points.
+     *
      * @return string
      */
     public function getTotalInGBP()

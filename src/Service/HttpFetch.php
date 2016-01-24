@@ -85,10 +85,14 @@ class HttpFetch implements HttpFetchInterface
         // dom parse the information we need from the page
         $crawler = new Crawler($url->getResponseContents());
 
+        // @todo review description data - it is a mess, crappy content?
+        // are we after the meta description or value in the information tab?
+        // going for information tab
+
         // and create the new product
         return new Product(
             $crawler->filter("div.productSummary h1")->text(),
-            '',
+            $crawler->filter("#information div.productText")->first()->text(),  // meh?
             $crawler->filter("p.pricePerUnit")->text(),
             $url
         );
@@ -102,7 +106,7 @@ class HttpFetch implements HttpFetchInterface
      */
     public function fetchUrl($uri)
     {
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', trim($uri));
         $this->log("Fetching " . $uri);
         return new Url(
             $request,

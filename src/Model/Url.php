@@ -71,13 +71,13 @@ class Url implements \JsonSerializable
     }
 
     /**
-     * Gets size in KB - assuming 1024 bytes in a kbytes, osx thinks its 1000...
+     * Gets size in KB - assuming 1000 kb, depends on who's asking...
      *
-     * @return float
+     * @return string
      */
     public function getSizeInKb()
     {
-        return number_format(($this->getSize() / 1024), 2, '.', '');
+        return number_format(($this->getSize() / 1000), 2, '.', '') . 'kb';
     }
 
     /**

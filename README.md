@@ -3,11 +3,23 @@ Example HTTP parser to fetch and retrieve information about remote HTML pages - 
 
 To run the example application please use the following domain (providing php is installed your local system):
 
-./examples/console.php http-parser:fetch:products http://url.com/you/want/to/scrape
+`./examples/console.php http-parser:fetch:products http://url.com/you/want/to/scrape | python -m json.tool`
 
 You can also make use of the URI meta command using the following:
 
-./examples/console.php http-parser:fetch:urimeta http://url.com/you/want/to/scrape
+`./examples/console.php http-parser:fetch:urimeta http://url.com/you/want/to/scrape | python -m json.tool`
+
+Both commands can be run with a verbose -v flag to receive console output dealing the behaviour of the scrape.
+
+`./examples/console.php http-parser:fetch:products http://url.com/you/want/to/scrape -v`
+
+# Install
+
+Please install the application with Composer, if you are not familiar with composer please visit [http://getcomposer.org].
+
+# Unit test
+
+Can by run via ./vendor/bin/phpunit within this directory after completing the composer install.
 
 # Approach
 
@@ -33,11 +45,3 @@ Other code:
 ** Basic service which acts as a facade to GuzzelHttp and hydrates the domain models.
 * JsonFormatter
 ** Service to transform the domain model in to a format which is required.
-
-# Install
-
-Please install the application with Composer.
-
-# Unit test
-
-Can by run via ./vendor/bin/phpunit within this directory after completing the composer install.
