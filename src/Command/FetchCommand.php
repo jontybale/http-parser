@@ -9,35 +9,34 @@
 namespace JontyBale\HttpParser\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class FetchUriMetaCommand used for retrieving meta data about a URI.
+ * Basic fetch command with some functionality to ensure we are DRY
  *
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class FetchUriMetaCommand extends FetchCommand
+class FetchCommand extends Command
 {
-    protected function configure()
+    /**
+     * Method to check our input for a URI argument and ensure that it is a valid
+     * URL.
+     *
+     * @param InputInterface $input
+     */
+    public function validateInputUrl(InputInterface $input)
     {
-        $this
-            ->setName('http-parser:fetch:urimeta')
-            ->setDescription('Fetch and retrieve information about a remote HTML page via HTTP.')
-            ->addArgument(
-                'uri',
-                InputArgument::REQUIRED,
-                'URI of the page which you want to get meta data for.'
-            )
-        ;
+        if (false === filter_var($input->getArgument('uri'), FILTER_VALIDATE_URL)) {
+            throw new InvalidArgumentException('Invalid URL supplied.');
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->validateInputUrl($input);
-
         throw new \BadMethodCallException('Not implemented.');
     }
 }

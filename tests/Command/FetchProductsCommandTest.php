@@ -34,7 +34,7 @@ class FetchProductsCommandTest extends \PHPUnit_Framework_TestCase {
      * Ensure bad argument is thrown when supplied with an invalid url.
      *
      * @expectedException \Symfony\Component\Console\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Invalid URI supplied.
+     * @expectedExceptionMessage Invalid URL supplied.
      */
     public function testExecuteWithInvalidUri()
     {

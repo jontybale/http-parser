@@ -30,4 +30,27 @@ class FetchUriMetaCommandTest extends \PHPUnit_Framework_TestCase {
         $commandTester->execute(array('command' => $command->getName()));
     }
 
+    /**
+     * Ensure bad argument is thrown when supplied with an invalid url.
+     *
+     * @expectedException \Symfony\Component\Console\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid URL supplied.
+     */
+    public function testExecuteWithInvalidUri()
+    {
+        $invalidUrl = 'http//monkey.com/do-you-like-tennis';
+
+        $application = new Application();
+        $application->add(new FetchUriMetaCommand());
+
+        $command = $application->find('http-parser:fetch:urimeta');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+            array(
+                'command' => $command->getName(),
+                'uri'     => $invalidUrl
+            )
+        );
+    }
+
 }

@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class FetchProductsCommand extends Command
+class FetchProductsCommand extends FetchCommand
 {
     /**
      * Setup command options and configuration settings.
@@ -47,9 +47,7 @@ class FetchProductsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (false === filter_var($input->getArgument('uri'), FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException('Invalid URI supplied.');
-        }
+        $this->validateInputUrl($input);
 
         throw new \BadMethodCallException('Not implemented.');
     }
