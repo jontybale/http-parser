@@ -47,8 +47,8 @@ Models should support [JsonSerializable interface](http://php.net/manual/en/clas
 
 # To Do
 
-# Exception handling is poor - does not handle failure well - needs to be significantly improved.
-# Unit tests missing from key HttpFetch methods.
-# More logging.
-# More output options would be nice (to file, other formats).
+1. Exception handling is poor - does not handle failure well - needs to be significantly improved.
+2. Unit tests missing from key HttpFetch methods.
+3. More logging.
+4. More output options would be nice (to file, other formats).
 
