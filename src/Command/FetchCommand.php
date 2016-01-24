@@ -27,13 +27,17 @@ class FetchCommand extends Command
      * URL.
      *
      * @param InputInterface $input
+     * @param OutputInterface $output
      * @return string
      */
-    public function validateInputUrl(InputInterface $input)
+    public function validateInputUrl(InputInterface $input, OutputInterface $output)
     {
         $url = filter_var($input->getArgument('uri'), FILTER_VALIDATE_URL);
         if (false === $url) {
             throw new InvalidArgumentException('Invalid URL supplied.');
+        }
+        if ($output->isVerbose()) {
+            $output->writeln(" > <comment>Input URL: $url</comment>");
         }
         return $url;
     }

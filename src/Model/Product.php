@@ -80,17 +80,18 @@ class Product implements \JsonSerializable
      *
      * @param $title
      * @param $description
-     * @param $unitPrice
+     * @param $unitPriceInPence
      * @param Url $url
      */
-    public function __construct($title, $description, $unitPrice, Url $url)
+    public function __construct($title, $description, $unitPriceInPence, Url $url)
     {
-        $this->title = $title;
-        $this->description = $description;
+        $this->title = trim($title);
+        $this->description = trim($description);
         $this->url = $url;
-
-        $unitPriceInPence = intval($unitPrice * 100);
-        $this->unitPrice = new Money($unitPriceInPence, new Currency('GBP'));
+        $this->unitPrice = new Money(
+            intval(filter_var($unitPriceInPence, FILTER_SANITIZE_NUMBER_INT)),
+            new Currency('GBP')
+        );
     }
 
     /**
@@ -104,7 +105,7 @@ class Product implements \JsonSerializable
     {
         return (object) [
             'title' => $this->getTitle(),
-            'size' => $this->getUrl()->getSize(),
+            'size' => $this->getUrl()->getSizeInKb(),
             'unit_price' => $this->getUnitPriceInGBP(),
             'description' => $this->getDescription()
         ];

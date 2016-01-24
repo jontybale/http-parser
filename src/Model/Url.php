@@ -69,4 +69,24 @@ class Url implements \JsonSerializable
     {
         return filter_var($this->response->getHeaderLine('Content-Length'), FILTER_VALIDATE_INT);
     }
+
+    /**
+     * Gets size in KB - assuming 1024 bytes in a kbytes, osx thinks its 1000...
+     *
+     * @return float
+     */
+    public function getSizeInKb()
+    {
+        return number_format(($this->getSize() / 1024), 2, '.', '');
+    }
+
+    /**
+     * Proxy method to get the body content.
+     *
+     * @return \Psr\Http\Message\StreamInterface
+     */
+    public function getResponseContents()
+    {
+        return $this->response->getBody()->getContents();
+    }
 }

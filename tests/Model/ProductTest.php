@@ -26,7 +26,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $expectedPrice = new Money(250, new Currency('GBP'));
         $title = 'Product 1 Title';
         $description = 'Product 1 Description';
-        $price = '2.50';
+        $price = '250';
         $uri = 'http://product1.com';
         $request = new Request('GET', $uri);
         $size = 97961231;
@@ -48,6 +48,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     {
         $expectedPrice = '1.80';
 
+        $price = '180';
         $title = 'Product 1 Title';
         $description = 'Product 1 Description';
         $uri = 'http://product1.com';
@@ -56,7 +57,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $response = new Response(200, ['Content-Length' => $size]);
         $url = new Url($request, $response);
 
-        $sut = new Product($title, $description, $expectedPrice, $url);
+        $sut = new Product($title, $description, $price, $url);
         $price = $sut->getUnitPriceInGBP();
 
         $this->assertEquals($expectedPrice, $price);

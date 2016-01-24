@@ -28,7 +28,7 @@ class ProductListTest extends \PHPUnit_Framework_TestCase
     {
         $title = 'Product 1 Title';
         $description = 'Product 1 Description';
-        $price = is_null($price) ? '2.50' : $price;
+        $price = is_null($price) ? '250' : $price;
         $uri = 'http://product1.com';
         $request = new Request('GET', $uri);
         $size = 97961231;
@@ -50,9 +50,9 @@ class ProductListTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTotal()
     {
-        $p1 = $this->getExampleProduct('1.50');
-        $p2 = $this->getExampleProduct('8.82');
-        $p3 = $this->getExampleProduct('1047.82');
+        $p1 = $this->getExampleProduct('150');
+        $p2 = $this->getExampleProduct('882');
+        $p3 = $this->getExampleProduct('104782');
 
         $sut = new ProductList();
         $this->assertEquals(new Money(0, new Currency('GBP')), $sut->getTotal());
@@ -69,9 +69,9 @@ class ProductListTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTotalInGBP()
     {
-        $p1 = $this->getExampleProduct('1.50');
-        $p2 = $this->getExampleProduct('8.82');
-        $p3 = $this->getExampleProduct('1047.82');
+        $p1 = $this->getExampleProduct('150');
+        $p2 = $this->getExampleProduct('882');
+        $p3 = $this->getExampleProduct('104782');
 
         $sut = new ProductList();
         $this->assertEquals('0.00', $sut->getTotalInGBP());
@@ -119,13 +119,13 @@ class ProductListTest extends \PHPUnit_Framework_TestCase
                 'results' => [
                     (object) [
                         'title' => $p1Title,
-                        'size' => $p1Size,
+                        'size' => number_format($p1Size/1024, 2, '.', ''),
                         'unit_price' => $p1UnitPrice,
                         'description' => $p1Description
                     ],
                     (object) [
                         'title' => $p2Title,
-                        'size' => $p2Size,
+                        'size' => number_format($p2Size/1024, 2, '.', ''),
                         'unit_price' => $p2UnitPrice,
                         'description' => $p2Description
                     ],

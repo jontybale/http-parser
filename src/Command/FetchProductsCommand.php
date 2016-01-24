@@ -49,18 +49,10 @@ class FetchProductsCommand extends FetchCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $inputUrl = $this->validateInputUrl($input);
-        if ($output->isVerbose()) {
-            $output->writeln(" > <comment>Input URL: $inputUrl</comment>");
-        }
-
-        // timeout should be much lower in production, high due to latency / bandwidth at home.
-        $client = new Client(['timeout' => 5]);
-        $httpFetch = new HttpFetch($client);
-        $httpFetch->attachConsoleOutput($output);
-
-        // and fetch our productList
-        $productList = $httpFetch->fetchProducts($inputUrl);
+        // timeout should be much lower in production, high due to latency / bandwidth via ADSL.
+        $httpFetch = new HttpFetch(new Client(['timeout' => 5]), $output);
+        $products = $httpFetch->fetchProducts($this->validateInputUrl($input, $output));
+        $output->write(json_encode($products));
 
     }
 

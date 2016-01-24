@@ -8,6 +8,8 @@
 
 namespace JontyBale\HttpParser\Command;
 
+use GuzzleHttp\Client;
+use JontyBale\HttpParser\Service\HttpFetch;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,9 +38,8 @@ class FetchUriMetaCommand extends FetchCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->validateInputUrl($input);
-
-
-        throw new \BadMethodCallException('Not implemented.');
+        // timeout should be much lower in production, high due to latency / bandwidth via ADSL.
+        $httpFetch = new HttpFetch(new Client(['timeout' => 5]), $output);
+        $httpFetch->fetchUrl($this->validateInputUrl($input, $output));
     }
 }

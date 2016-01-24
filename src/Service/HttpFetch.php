@@ -11,8 +11,10 @@ namespace JontyBale\HttpParser\Service;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use JontyBale\HttpParser\Model\Product;
+use JontyBale\HttpParser\Model\ProductList;
 use JontyBale\HttpParser\Model\Url;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class HttpFetch used as a facade on top of GuzzleHttp to fetch remote data and create
@@ -34,30 +36,62 @@ class HttpFetch implements HttpFetchInterface
      *
      * @param Client $client
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, OutputInterface $output = null)
     {
         $this->guzzle = $client;
+        $this->attachConsoleOutput($output);
     }
 
     /**
      * Method to get an array of products from a remote URI.
      *
      * @param $uri string
-     * @return Product[]
+     * @return ProductList
      */
     public function fetchProducts($uri)
     {
+        // init our product list
+        $products = new ProductList();
+
         // get main product URL
         $url = $this->fetchUrl($uri);
 
-        // dom parse to get our product list
+        // setup domcrawler
+        $crawler = new Crawler($url->getResponseContents());
+        $elements = $crawler->filter("#productLister div.productInfo h3 a");
+        /** @var \DOMElement $element */
+        foreach ($elements AS $element) {
+            $products->addProduct(
+                $this->getProductFromUrl(
+                    $this->fetchUrl(
+                        $element->getAttribute('href')
+                    )
+                )
+            );
+        }
 
-        // fetchUrl for each product
+        // and return!
+        return $products;
+    }
 
+    /**
+     * Method to parse the dom from a Url to create a Product.
+     *
+     * @param Url $url
+     * @return Product
+     */
+    public function getProductFromUrl(Url $url)
+    {
+        // dom parse the information we need from the page
+        $crawler = new Crawler($url->getResponseContents());
 
-        // return product list
-
-        // TODO: Implement fetchProducts() method.
+        // and create the new product
+        return new Product(
+            $crawler->filter("div.productSummary h1")->text(),
+            '',
+            $crawler->filter("p.pricePerUnit")->text(),
+            $url
+        );
     }
 
     /**
@@ -81,9 +115,11 @@ class HttpFetch implements HttpFetchInterface
      *
      * @param OutputInterface $output
      */
-    public function attachConsoleOutput(OutputInterface $output)
+    public function attachConsoleOutput(OutputInterface $output = null)
     {
-        $this->consoleOutput = $output;
+        if (!is_null($output)) {
+            $this->consoleOutput = $output;
+        }
     }
 
     /**
