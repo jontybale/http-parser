@@ -30,4 +30,27 @@ class FetchProductsCommandTest extends \PHPUnit_Framework_TestCase {
         $commandTester->execute(array('command' => $command->getName()));
     }
 
+    /**
+     * Ensure bad argument is thrown when supplied with an invalid url.
+     *
+     * @expectedException \Symfony\Component\Console\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid URI supplied.
+     */
+    public function testExecuteWithInvalidUri()
+    {
+        $invalidUrl = 'http//monkey.com/do-you-like-tennis';
+
+        $application = new Application();
+        $application->add(new FetchProductsCommand());
+
+        $command = $application->find('http-parser:fetch:products');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+            array(
+                'command' => $command->getName(),
+                'uri'     => $invalidUrl
+            )
+        );
+    }
+
 }
