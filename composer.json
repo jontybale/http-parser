@@ -1,0 +1,24 @@
+{
+    "name": "jontybale/http-parser",
+    "description": "Example HTTP parser to fetch and retrieve information about remote HTML pages.",
+    "authors": [
+        {
+            "name": "Jonty Bale",
+            "email": "jbale@gridscape.co.uk"
+        }
+    ],
+    "require": {
+        "symfony/console": "^3.0",
+        "symfony/dom-crawler": "^3.0",
+        "symfony/css-selector": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "JontyBale\\HttpParser\\": "src/",
+            "JontyBale\\HttpParser\\Tests\\": "test/"
+        }
+    }
+}
