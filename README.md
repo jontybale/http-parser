@@ -1,7 +1,13 @@
 # http-parser
 Example HTTP parser to fetch and retrieve information about remote HTML pages.
 
-To run the example application please use the following domain (providing php is installed your local system):
+## Install
+
+Please install the application with Composer, if you are not familiar with composer please visit [http://getcomposer.org](http://getcomposer.org).
+
+## Usage
+
+To run the example application please use the following command once `composer install` has been run:
 
 `./examples/console.php http-parser:fetch:products http://url.com/you/want/to/scrape | python -m json.tool`
 
@@ -13,31 +19,24 @@ Both commands can be run with a verbose -v flag to receive console output dealin
 
 `./examples/console.php http-parser:fetch:products http://url.com/you/want/to/scrape -v`
 
-# Install
 
-Please install the application with Composer, if you are not familiar with composer please visit [http://getcomposer.org](http://getcomposer.org).
+## Unit test
 
-# Unit test
+Can by run via ./vendor/bin/phpunit within the root directory of the repository after completing the composer install.
 
-Can by run via ./vendor/bin/phpunit within this directory after completing the composer install.
+## Assumptions
 
-# Assumptions
+1. Description will be embedded within the DOM, not the <head> meta.
+2. Will be returning size in KB (Kilo Bytes)
 
-# Description will be embedded within the DOM, not the <head> meta.
-# Will be returning size in KB (Kilo Bytes)
+## Approach
 
-# Approach
-
-
-
-Stateless commands which perform each part of the application routine as desired.
-
-### Commands required:
+### Commands
 
 * FetchProductsCommand - fetch a HTML dom page and create a set of product information and return as a JSON string to the console.
 * FetchUriMetaCommand - fetch a remote HTML page and return a JSON object which represents data about a URI.
 
-### Simple domain model:
+### Domain
 
 #### Models
 
@@ -52,7 +51,7 @@ Models should support [JsonSerializable interface](http://php.net/manual/en/clas
 
 * *HttpFetch* - Basic service which acts as a facade to GuzzelHttp and hydrates the domain models.
 
-# To Do
+## To Do
 
 1. Exception handling is poor - does not handle failure well - needs to be significantly improved.
 2. Unit tests missing from key HttpFetch methods.
