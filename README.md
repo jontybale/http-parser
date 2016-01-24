@@ -22,14 +22,14 @@ Looking for .productLister UL in the example page, link is then contained within
 
 ### Simple domain model:
 
-* Page - model representing our HTML page.
+* UriMeta - model representing our HTML meta data.
 * Product - model representing data about a product.
 
 Models should support [JsonSerializable interface](http://php.net/manual/en/class.jsonserializable.php) for returning data to the UI via console.
 
 Other code:
 
-* HttpService
+* HttpFetch
 ** Basic service which acts as a facade to GuzzelHttp and hydrates the domain models.
 * Formatter
 ** Service to transform the domain model in to a format which is required.
