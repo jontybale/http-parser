@@ -53,7 +53,7 @@ class HttpFetchTest extends \PHPUnit_Framework_TestCase
 
         $output = $this->getMock('Symfony\Component\Console\Output\OutputInterface');
         $output->expects($this->once())->method('isVerbose')->willReturn(true);
-        $output->expects($this->once())->method('writeln')->with("Fetching $expectedUrl");
+        $output->expects($this->once())->method('writeln')->with(" > <info>Fetching $expectedUrl</info>");
 
         $sut = new HttpFetch($client);
         $sut->attachConsoleOutput($output);
