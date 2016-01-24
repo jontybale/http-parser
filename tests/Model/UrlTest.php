@@ -44,4 +44,24 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($sut->getSize(), $expectedSize);
     }
 
+    /**
+     * Testing json serialisation of the Url
+     */
+    public function testJsonSerialize()
+    {
+        $expectedSize = 123141;
+        $expectedUrl = 'http://www.google.com/let-us-see-what-we-have';
+        $expectedJson = json_encode([
+            'url' => $expectedUrl,
+            'size' => $expectedSize
+        ]);
+
+        $request = new Request('GET', $expectedUrl);
+        $response = new Response(200, ['Content-Length' => $expectedSize]);
+
+        $sut = new Url($request, $response);
+
+        $this->assertEquals($expectedJson, json_encode($sut));
+    }
+
 }

@@ -36,7 +36,10 @@ class Url implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+        return (object) [
+            'url' => $this->getUrl(),
+            'size' => $this->getSize()
+        ];
     }
 
     /**
@@ -57,15 +60,6 @@ class Url implements \JsonSerializable
     public function getUrl()
     {
         return $this->request->getUri()->__toString();
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        // do some dom parsing
-        //
     }
 
     /**
