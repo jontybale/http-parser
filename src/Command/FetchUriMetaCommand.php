@@ -40,6 +40,7 @@ class FetchUriMetaCommand extends FetchCommand
     {
         // timeout should be much lower in production, high due to latency / bandwidth via ADSL.
         $httpFetch = new HttpFetch(new Client(['timeout' => 5]), $output);
-        $httpFetch->fetchUrl($this->validateInputUrl($input, $output));
+        $url = $httpFetch->fetchUrl($this->validateInputUrl($input, $output));
+        $output->write(json_encode($url));
     }
 }

@@ -38,7 +38,7 @@ class Url implements \JsonSerializable
     {
         return (object) [
             'url' => $this->getUrl(),
-            'size' => $this->getSize()
+            'size' => $this->getSizeInKb()
         ];
     }
 
@@ -71,13 +71,13 @@ class Url implements \JsonSerializable
     }
 
     /**
-     * Gets size in KB - assuming 1000 kb, depends on who's asking...
+     * Gets size in kilobytes (KB) - assuming 1000 bytes per unit, depends on who's asking...
      *
      * @return string
      */
     public function getSizeInKb()
     {
-        return number_format(($this->getSize() / 1000), 2, '.', '') . 'kb';
+        return number_format(($this->getSize() / 1000), 2, '.', '') . 'KB';
     }
 
     /**

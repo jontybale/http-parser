@@ -108,7 +108,7 @@ class ProductListTest extends \PHPUnit_Framework_TestCase
         $p2UnitPrice = '2.20';
         $p2Uri = 'http://product2.com';
         $p2Request = new Request('GET', $p2Uri);
-        $p2Size = 12351231;
+        $p2Size = 123871203712;
         $p2Response = new Response(200, ['Content-Length' => $p2Size]);
         $p2Url = new Url($p2Request, $p2Response);
         $p2 = new Product($p2Title, $p2Description, $p2UnitPrice, $p2Url);
@@ -119,13 +119,13 @@ class ProductListTest extends \PHPUnit_Framework_TestCase
                 'results' => [
                     (object) [
                         'title' => $p1Title,
-                        'size' => number_format($p1Size/1024, 2, '.', ''),
+                        'size' => number_format($p1Size/1000, 2, '.', '') . 'KB',
                         'unit_price' => $p1UnitPrice,
                         'description' => $p1Description
                     ],
                     (object) [
                         'title' => $p2Title,
-                        'size' => number_format($p2Size/1024, 2, '.', ''),
+                        'size' => number_format($p2Size/1000, 2, '.', '') . 'KB',
                         'unit_price' => $p2UnitPrice,
                         'description' => $p2Description
                     ],

@@ -21,7 +21,14 @@ Please install the application with Composer, if you are not familiar with compo
 
 Can by run via ./vendor/bin/phpunit within this directory after completing the composer install.
 
+# Assumptions
+
+# Description will be embedded within the DOM, not the <head> meta.
+# Will be returning size in KB (Kilo Bytes)
+
 # Approach
+
+
 
 Stateless commands which perform each part of the application routine as desired.
 

@@ -53,7 +53,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $expectedUrl = 'http://www.google.com/let-us-see-what-we-have';
         $expectedJson = json_encode([
             'url' => $expectedUrl,
-            'size' => $expectedSize
+            'size' => number_format($expectedSize/1000, 2, ".", "") . 'KB'
         ]);
 
         $request = new Request('GET', $expectedUrl);
