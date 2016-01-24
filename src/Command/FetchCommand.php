@@ -34,9 +34,4 @@ class FetchCommand extends Command
             throw new InvalidArgumentException('Invalid URL supplied.');
         }
     }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        throw new \BadMethodCallException('Not implemented.');
-    }
 }

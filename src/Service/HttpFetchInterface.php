@@ -15,7 +15,7 @@ use JontyBale\HttpParser\Model\UriMeta;
  * Interface HttpFetchInterface defining the HttpFetch service.
  *
  * @author jontyb
- * @package JontyBale\HttpParser\Service
+ * @package JontyBale\HttpParser
  */
 interface HttpFetchInterface
 {

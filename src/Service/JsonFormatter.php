@@ -9,12 +9,12 @@
 namespace JontyBale\HttpParser\Service;
 
 /**
- * Class Formatter to transpose data from the domain in to a format for display.
+ * Class JsonFormatter to transpose data from the domain in to a JSON format.
  *
  * @author jontyb
  * @package JontyBale\HttpParser
  */
-class Formatter
+class JsonFormatter
 {
 
 }
