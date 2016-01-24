@@ -22,7 +22,7 @@ Looking for .productLister UL in the example page, link is then contained within
 
 ### Simple domain model:
 
-* UriMeta - model representing our HTML meta data.
+* Url - model representing our HTML meta data.
 * Product - model representing data about a product.
 
 Models should support [JsonSerializable interface](http://php.net/manual/en/class.jsonserializable.php) for returning data to the UI via console.
@@ -31,5 +31,13 @@ Other code:
 
 * HttpFetch
 ** Basic service which acts as a facade to GuzzelHttp and hydrates the domain models.
-* Formatter
+* JsonFormatter
 ** Service to transform the domain model in to a format which is required.
+
+# Install
+
+Please install the application with Composer.
+
+# Unit test
+
+Can by run via ./vendor/bin/phpunit within this directory after completing the composer install.

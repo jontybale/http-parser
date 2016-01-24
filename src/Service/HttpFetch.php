@@ -8,6 +8,8 @@
 
 namespace JontyBale\HttpParser\Service;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use JontyBale\HttpParser\Model\Product;
 use JontyBale\HttpParser\Model\Url;
 
@@ -20,6 +22,19 @@ use JontyBale\HttpParser\Model\Url;
  */
 class HttpFetch implements HttpFetchInterface
 {
+    /** @var Client */
+    private $guzzle;
+
+    /**
+     * Setup fetcher.
+     *
+     * @param Client $client
+     */
+    public function __construct(Client $client)
+    {
+        $this->guzzle = $client;
+    }
+
     /**
      * Method to get an array of products from a remote URI.
      *
@@ -28,17 +43,23 @@ class HttpFetch implements HttpFetchInterface
      */
     public function fetchProducts($uri)
     {
+        $url = $this->fetchUrl($uri);
+
         // TODO: Implement fetchProducts() method.
     }
 
     /**
-     * Method to get a UriMeta object for a specific URI.
+     * Method to get a Url object for a specific URI.
      *
      * @param $uri string
      * @return Url
      */
     public function fetchUrl($uri)
     {
-        // TODO: Implement fetchUrl() method.
+        $request = new Request('GET', $uri);
+        return new Url(
+            $request,
+            $this->guzzle->send($request, ['timeout' => 2])
+        );
     }
 }

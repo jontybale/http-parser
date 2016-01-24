@@ -8,13 +8,36 @@
 
 namespace JontyBale\HttpParser\Tests\Command;
 
-use JontyBale\HttpParser\Command\FetchCommand;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Tester\CommandTester;
+use JontyBale\HttpParser\Service\HttpFetch;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\RequestException;
+
+
 
 class HttpFetchTest extends \PHPUnit_Framework_TestCase
 {
-    // should be able to
+    /**
+     * Test should fetch data from a URL and return a Url object with the same URL.
+     */
+    public function testGetUrl()
+    {
+        // setup our url and mock guzzle
+        $expectedUrl = 'http://www.google.com/this-is-a-test';
+        $expectedSize = 34512;
+        $mockHandler = new MockHandler([
+            new Response(200, ['Content-Length' => $expectedSize]),
+        ]);
+        $handler = HandlerStack::create($mockHandler);
+        $client = new Client(['handler' => $handler]);
+        $sut = new HttpFetch($client);
 
+        $url = $sut->fetchUrl($expectedUrl);
+
+        $this->assertEquals($url->getUrl(), $expectedUrl);
+        $this->assertEquals($url->getSize(), $expectedSize);
+    }
 }

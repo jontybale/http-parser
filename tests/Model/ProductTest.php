@@ -12,6 +12,6 @@ use JontyBale\HttpParser\Model\Product;
 
 class ProductTest extends \PHPUnit_Framework_TestCase
 {
-    // should be able to
+    // init the class should
 
 }
